@@ -1,0 +1,521 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Libra - Library Management</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <h2 class="logo">📚 Libra<span>.</span></h2>
+
+        <nav>
+            <a href="#dashboard" class="active">▦ Dashboard</a>
+            <a href="#books">📖 All Books</a>
+            <a href="#categories">▤ Categories</a>
+            <a href="#issued">📋 Issued Books</a>
+            <a href="#returned">↩ Returned Books</a>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <p>LIBRARY SYSTEM</p>
+            <a href="#help">❔ Help & Support</a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content" id="dashboard">
+
+        <!-- Header -->
+        <header class="topbar">
+            <div>
+                <h1>Library Dashboard</h1>
+                <p class="subtitle">Welcome back! Here's your library overview.</p>
+            </div>
+
+            <div class="profile">
+                <div class="avatar">L</div>
+                <div>
+                    <strong>Library Admin</strong>
+                    <small>Administrator</small>
+                </div>
+            </div>
+        </header>
+
+        <!-- Search and Actions -->
+        <section class="toolbar">
+            <input
+                type="search"
+                id="searchInput"
+                placeholder="🔍 Search books, authors..."
+                aria-label="Search books"
+            >
+
+            <select id="categoryPicker" aria-label="Filter by category">
+                <option value="all">All Categories</option>
+                <option value="Technology">Technology</option>
+                <option value="Science">Science</option>
+                <option value="Fiction">Fiction</option>
+                <option value="History">History</option>
+                <option value="Education">Education</option>
+            </select>
+
+            <button class="primary-btn" id="addBookBtn">
+                + Add Book
+            </button>
+        </section>
+
+        <!-- Statistics -->
+        <section class="stats">
+            <article class="stat-card">
+                <div class="stat-icon purple">📚</div>
+                <p>Total Books</p>
+                <h2 id="totalBooks">6</h2>
+                <small>Books in the library</small>
+            </article>
+
+            <article class="stat-card">
+                <div class="stat-icon green">✓</div>
+                <p>Available Books</p>
+                <h2 id="availableBooks">4</h2>
+                <small>Ready to borrow</small>
+            </article>
+
+            <article class="stat-card">
+                <div class="stat-icon orange">📋</div>
+                <p>Issued Books</p>
+                <h2 id="issuedBooks">2</h2>
+                <small>Currently borrowed</small>
+            </article>
+
+            <article class="stat-card">
+                <div class="stat-icon blue">👥</div>
+                <p>Members</p>
+                <h2>128</h2>
+                <small>Registered members</small>
+            </article>
+        </section>
+
+        <!-- Book Collection -->
+        <section class="books-section" id="books">
+
+            <div class="section-heading">
+                <div>
+                    <h2>Book Collection</h2>
+                    <p>Explore and manage your library books.</p>
+                </div>
+
+                <span id="bookCount" class="book-count">6 books</span>
+            </div>
+
+            <div class="book-grid" id="bookGrid">
+
+                <article class="book-card"
+                    data-category="Technology"
+                    data-title="Python Programming"
+                    data-author="Guido van Rossum">
+
+                    <img
+                        src="https://covers.openlibrary.org/b/title/Python%20Programming-M.jpg"
+                        alt="Python programming book cover"
+                        onerror="this.src='https://placehold.co/240x300/e9e4ff/5140a5?text=Python'">
+
+                    <div class="book-info">
+                        <span class="category">Technology</span>
+                        <h3>Python Programming</h3>
+                        <p>Guido van Rossum</p>
+                        <div class="book-footer">
+                            <span class="status available">Available</span>
+                            <button class="issue-btn" data-action="issue">Issue</button>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="book-card"
+                    data-category="Science"
+                    data-title="A Brief History of Time"
+                    data-author="Stephen Hawking">
+
+                    <img
+                        src="https://covers.openlibrary.org/b/title/A%20Brief%20History%20of%20Time-M.jpg"
+                        alt="A Brief History of Time book cover"
+                        onerror="this.src='https://placehold.co/240x300/dcecff/244d88?text=Science'">
+
+                    <div class="book-info">
+                        <span class="category">Science</span>
+                        <h3>A Brief History of Time</h3>
+                        <p>Stephen Hawking</p>
+                        <div class="book-footer">
+                            <span class="status issued">Issued</span>
+                            <button class="issue-btn" data-action="return">Return</button>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="book-card"
+                    data-category="Fiction"
+                    data-title="Harry Potter"
+                    data-author="J. K. Rowling">
+
+                    <img
+                        src="https://covers.openlibrary.org/b/title/Harry%20Potter%20and%20the%20Philosopher%27s%20Stone-M.jpg"
+                        alt="Harry Potter book cover"
+                        onerror="this.src='https://placehold.co/240x300/fff0cf/835c19?text=Harry+Potter'">
+
+                    <div class="book-info">
+                        <span class="category">Fiction</span>
+                        <h3>Harry Potter</h3>
+                        <p>J. K. Rowling</p>
+                        <div class="book-footer">
+                            <span class="status available">Available</span>
+                            <button class="issue-btn" data-action="issue">Issue</button>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="book-card"
+                    data-category="Education"
+                    data-title="Introduction to Algorithms"
+                    data-author="Thomas H. Cormen">
+
+                    <img
+                        src="https://covers.openlibrary.org/b/title/Introduction%20to%20Algorithms-M.jpg"
+                        alt="Introduction to Algorithms book cover"
+                        onerror="this.src='https://placehold.co/240x300/d9f5e7/236447?text=Algorithms'">
+
+                    <div class="book-info">
+                        <span class="category">Education</span>
+                        <h3>Introduction to Algorithms</h3>
+                        <p>Thomas H. Cormen</p>
+                        <div class="book-footer">
+                            <span class="status available">Available</span>
+                            <button class="issue-btn" data-action="issue">Issue</button>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="book-card"
+                    data-category="History"
+                    data-title="India After Gandhi"
+                    data-author="Ramachandra Guha">
+
+                    <img
+                        src="https://covers.openlibrary.org/b/title/India%20After%20Gandhi-M.jpg"
+                        alt="India After Gandhi book cover"
+                        onerror="this.src='https://placehold.co/240x300/ffe7db/9a4e2c?text=Indian+History'">
+
+                    <div class="book-info">
+                        <span class="category">History</span>
+                        <h3>India After Gandhi</h3>
+                        <p>Ramachandra Guha</p>
+                        <div class="book-footer">
+                            <span class="status issued">Issued</span>
+                            <button class="issue-btn" data-action="return">Return</button>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="book-card"
+                    data-category="Technology"
+                    data-title="Artificial Intelligence"
+                    data-author="Stuart Russell">
+
+                    <img
+                        src="https://covers.openlibrary.org/b/title/Artificial%20Intelligence%20A%20Modern%20Approach-M.jpg"
+                        alt="Artificial Intelligence book cover"
+                        onerror="this.src='https://placehold.co/240x300/e0eaff/324e94?text=Artificial+Intelligence'">
+
+                    <div class="book-info">
+                        <span class="category">Technology</span>
+                        <h3>Artificial Intelligence</h3>
+                        <p>Stuart Russell</p>
+                        <div class="book-footer">
+                            <span class="status available">Available</span>
+                            <button class="issue-btn" data-action="issue">Issue</button>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+
+            <p id="emptyMessage" class="empty-message" hidden>
+                No books found. Try another search or category.
+            </p>
+        </section>
+
+        <!-- Issued Books -->
+        <section class="issued-section" id="issued">
+            <div class="section-heading">
+                <div>
+                    <h2>Issued Books</h2>
+                    <p>Track books currently borrowed from the library.</p>
+                </div>
+            </div>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Book Name</th>
+                            <th>Author</th>
+                            <th>Category</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="issuedTable"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <footer id="help">
+            <p>© 2026 Libra Library Management System | Built with HTML & CSS</p>
+        </footer>
+
+    </main>
+</div>
+
+<!-- Add Book Dialog -->
+<dialog id="addBookDialog">
+    <form id="addBookForm">
+        <h2>Add a New Book</h2>
+
+        <label for="newTitle">Book Title</label>
+        <input id="newTitle" type="text" required placeholder="Enter book title">
+
+        <label for="newAuthor">Author</label>
+        <input id="newAuthor" type="text" required placeholder="Enter author name">
+
+        <label for="newCategory">Category</label>
+        <select id="newCategory" required>
+            <option value="Technology">Technology</option>
+            <option value="Science">Science</option>
+            <option value="Fiction">Fiction</option>
+            <option value="History">History</option>
+            <option value="Education">Education</option>
+        </select>
+
+        <label for="newCover">Cover image URL (optional)</label>
+        <input id="newCover" type="url" placeholder="https://example.com/book.jpg">
+
+        <div class="dialog-actions">
+            <button type="button" class="secondary-btn" id="cancelAdd">Cancel</button>
+            <button type="submit" class="primary-btn">Add Book</button>
+        </div>
+    </form>
+</dialog>
+
+<script>
+    const searchInput = document.getElementById("searchInput");
+    const categoryPicker = document.getElementById("categoryPicker");
+    const bookGrid = document.getElementById("bookGrid");
+    const emptyMessage = document.getElementById("emptyMessage");
+    const addBookDialog = document.getElementById("addBookDialog");
+
+    function allBooks() {
+        return [...bookGrid.querySelectorAll(".book-card")];
+    }
+
+    function filterBooks() {
+        const query = searchInput.value.trim().toLowerCase();
+        const category = categoryPicker.value;
+        let visible = 0;
+
+        allBooks().forEach(book => {
+            const title = book.dataset.title.toLowerCase();
+            const author = book.dataset.author.toLowerCase();
+            const matchesText = title.includes(query) || author.includes(query);
+            const matchesCategory =
+                category === "all" || book.dataset.category === category;
+
+            const show = matchesText && matchesCategory;
+            book.hidden = !show;
+
+            if (show) visible++;
+        });
+
+        emptyMessage.hidden = visible !== 0;
+        document.getElementById("bookCount").textContent =
+            visible + (visible === 1 ? " book" : " books");
+    }
+
+    function updateDashboard() {
+        const books = allBooks();
+        const issued = books.filter(book =>
+            book.querySelector(".status").classList.contains("issued")
+        ).length;
+
+        document.getElementById("totalBooks").textContent = books.length;
+        document.getElementById("issuedBooks").textContent = issued;
+        document.getElementById("availableBooks").textContent =
+            books.length - issued;
+
+        renderIssuedTable();
+    }
+
+    function renderIssuedTable() {
+        const tbody = document.getElementById("issuedTable");
+        tbody.replaceChildren();
+
+        allBooks().filter(book =>
+            book.querySelector(".status").classList.contains("issued")
+        ).forEach(book => {
+            const row = document.createElement("tr");
+            const values = [
+                book.dataset.title,
+                book.dataset.author,
+                book.dataset.category
+            ];
+
+            values.forEach(value => {
+                const cell = document.createElement("td");
+                cell.textContent = value;
+                row.appendChild(cell);
+            });
+
+            const statusCell = document.createElement("td");
+            const badge = document.createElement("span");
+            badge.className = "status issued";
+            badge.textContent = "Issued";
+            statusCell.appendChild(badge);
+            row.appendChild(statusCell);
+
+            const actionCell = document.createElement("td");
+            const returnButton = document.createElement("button");
+            returnButton.className = "issue-btn";
+            returnButton.textContent = "Return";
+            returnButton.addEventListener("click", () => {
+                changeBookStatus(book, "available");
+            });
+            actionCell.appendChild(returnButton);
+            row.appendChild(actionCell);
+
+            tbody.appendChild(row);
+        });
+
+        if (!tbody.children.length) {
+            const row = document.createElement("tr");
+            const cell = document.createElement("td");
+            cell.colSpan = 5;
+            cell.textContent = "No books are currently issued.";
+            cell.className = "empty-table";
+            row.appendChild(cell);
+            tbody.appendChild(row);
+        }
+    }
+
+    function changeBookStatus(book, newStatus) {
+        const status = book.querySelector(".status");
+        const button = book.querySelector(".issue-btn");
+
+        status.className = "status " + newStatus;
+        status.textContent =
+            newStatus === "issued" ? "Issued" : "Available";
+
+        button.textContent =
+            newStatus === "issued" ? "Return" : "Issue";
+        button.dataset.action =
+            newStatus === "issued" ? "return" : "issue";
+
+        updateDashboard();
+    }
+
+    bookGrid.addEventListener("click", event => {
+        const button = event.target.closest(".issue-btn");
+        if (!button) return;
+
+        const book = button.closest(".book-card");
+        const isIssued = book.querySelector(".status").classList.contains("issued");
+
+        if (isIssued) {
+            changeBookStatus(book, "available");
+        } else {
+            changeBookStatus(book, "issued");
+        }
+    });
+
+    searchInput.addEventListener("input", filterBooks);
+    categoryPicker.addEventListener("change", filterBooks);
+
+    document.getElementById("addBookBtn").addEventListener("click", () => {
+        addBookDialog.showModal();
+    });
+
+    document.getElementById("cancelAdd").addEventListener("click", () => {
+        addBookDialog.close();
+    });
+
+    document.getElementById("addBookForm").addEventListener("submit", event => {
+        event.preventDefault();
+
+        const title = document.getElementById("newTitle").value.trim();
+        const author = document.getElementById("newAuthor").value.trim();
+        const category = document.getElementById("newCategory").value;
+        const cover = document.getElementById("newCover").value.trim();
+
+        if (!title || !author) return;
+
+        const card = document.createElement("article");
+        card.className = "book-card";
+        card.dataset.category = category;
+        card.dataset.title = title;
+        card.dataset.author = author;
+
+        const img = document.createElement("img");
+        img.alt = title + " book cover";
+        img.src = cover || "https://placehold.co/240x300/e9e4ff/5140a5?text=Book";
+        img.onerror = () => {
+            img.onerror = null;
+            img.src = "https://placehold.co/240x300/e9e4ff/5140a5?text=Book";
+        };
+
+        const info = document.createElement("div");
+        info.className = "book-info";
+
+        const categoryLabel = document.createElement("span");
+        categoryLabel.className = "category";
+        categoryLabel.textContent = category;
+
+        const heading = document.createElement("h3");
+        heading.textContent = title;
+
+        const authorLabel = document.createElement("p");
+        authorLabel.textContent = author;
+
+        const footer = document.createElement("div");
+        footer.className = "book-footer";
+
+        const status = document.createElement("span");
+        status.className = "status available";
+        status.textContent = "Available";
+
+        const button = document.createElement("button");
+        button.className = "issue-btn";
+        button.dataset.action = "issue";
+        button.textContent = "Issue";
+
+        footer.append(status, button);
+        info.append(categoryLabel, heading, authorLabel, footer);
+        card.append(img, info);
+        bookGrid.prepend(card);
+
+        document.getElementById("addBookForm").reset();
+        addBookDialog.close();
+
+        filterBooks();
+        updateDashboard();
+    });
+
+    // Initial dashboard setup
+    filterBooks();
+    updateDashboard();
+</script>
+
+</body>
+</html>
